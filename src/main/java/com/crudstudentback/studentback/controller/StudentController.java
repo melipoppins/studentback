@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class StudentController {
     }
 
     @GetMapping( "/students/{id}" )
-    public ResponseEntity<Student> getStudentsById( @PathVariable(value="id") Long studentId ) throws ResourceNotFoundException {
+    public ResponseEntity<Student> getStudentById( @PathVariable(value="id") Long studentId ) throws ResourceNotFoundException {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow( () -> new ResourceNotFoundException( "Student not found for this id:: " + studentId ));
         return ResponseEntity.ok().body( student );
