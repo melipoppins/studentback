@@ -12,7 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController @CrossOrigin( origins = "http://localhost:4200" )
+@RestController
+@CrossOrigin( origins = "http://localhost:4200" )
 @RequestMapping( "/api/v1" )
 public class StudentController {
     @Autowired
@@ -24,7 +25,8 @@ public class StudentController {
     }
 
     @GetMapping( "/students/{id}" )
-    public ResponseEntity<Student> getStudentById( @PathVariable(value="id") Long studentId ) throws ResourceNotFoundException {
+    public ResponseEntity<Student> getStudentById( @PathVariable(value="id") Long studentId )
+            throws ResourceNotFoundException {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow( () -> new ResourceNotFoundException( "Student not found for this id:: " + studentId ));
         return ResponseEntity.ok().body( student );
@@ -50,7 +52,8 @@ public class StudentController {
     }
 
     @DeleteMapping( "/students/{id}" )
-    public Map<String, Boolean> deleteStudent(@PathVariable( value = "id") Long studentId) throws ResourceNotFoundException {
+    public Map<String, Boolean> deleteStudent(@PathVariable( value = "id") Long studentId)
+            throws ResourceNotFoundException {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow( () -> new ResourceNotFoundException( "Student not found for this id:: " + studentId ));
 
